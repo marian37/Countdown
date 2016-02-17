@@ -1,0 +1,59 @@
+body {
+	height: auto;
+	width: auto;
+}
+
+.top {
+	height: 47%;
+	background-color: red;
+}
+
+.bottom {
+	height: 47%;	
+}
+
+.buttons {
+	height: 6%;
+	background-color: red;
+	text-align: right;
+}
+
+.buttons button {
+	height: 100%;
+	width: 10%;
+	font-size: 3vmin;
+}
+
+.time {
+	height: 70%;
+	text-align: center;
+	font-family: "monospace";
+	font-size: 28vmin;
+}
+
+.title {
+	height: 30%;
+	font-family: "Helvetica", "sans-serif";
+	font-size: 8vmin;
+	padding-left: 0.1em;
+}
+
+.settings {
+	font-size: 8vh;
+	width: 100%;
+}
+
+.settings td {
+	width: 50%;
+}
+
+.settings button {
+	font-size: 8vh;
+	float: right;
+}
+
+.settings input {
+	width: 100%;
+	height: 8vh;
+	font-size: 6vh;
+}
