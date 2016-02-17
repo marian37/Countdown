@@ -51,12 +51,6 @@ io.on("connection", function(socket) {
 			time: countdown.time,
 		});
 	});
-	socket.on("tick", function() {
-		socket.emit("tick", {
-			countdown: countdown.countdown,
-			time: countdown.time,
-		});
-	});
 	socket.on("save", function(data) {
 		if (data.countdown != "") {
 			defaultCountdown = data.countdown;
@@ -73,6 +67,20 @@ io.on("connection", function(socket) {
 			timeTitle: defaultTimeTitle
 		});
 	});
+	socket.on("join", function() {
+		socket.join("countdown");
+	});
+	socket.on("leave", function() {
+		socket.leave("countdown");
+	});
 });
+
+function myTimer() {
+	io.to("countdown").emit("tick", {
+		countdown: countdown.countdown,
+		time: countdown.time,
+	});
+}
+setInterval(myTimer, 1000);
 
 var server = http.listen(8080);

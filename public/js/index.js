@@ -1,10 +1,8 @@
 var socket = io();
 
 $(function() {
-	var timer = setInterval(myTimer, 1000);
-
-	if (window.location.pathname == "/settings") {
-		clearInterval(timer);
+	if (window.location.pathname == "/") {
+		socket.emit("join");
 	}
 
 	$("#playPause").on("click", function() {
@@ -14,6 +12,7 @@ $(function() {
 		socket.emit("reset");
 	});
 	$("#settings").on("click", function() {
+		socket.emit("leave");
 		window.location = "/settings";
 	});
 
@@ -50,14 +49,10 @@ $(function() {
 		window.location = "/";
 	});
 
-	$("#cancel").on("click", function() {
+	$("#cancel").on("click", function() {		
 		window.location = "/";
 	});
 });
-
-function myTimer() {
-	socket.emit("tick");
-}
 
 function playPauseSetText(running) {
 	if (running) {
