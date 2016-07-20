@@ -79,6 +79,7 @@ function myTimer() {
 	io.to("countdown").emit("tick", {
 		countdown: countdown.countdown,
 		time: countdown.time,
+		running: countdown.running,
 	});
 }
 setInterval(myTimer, 1000);

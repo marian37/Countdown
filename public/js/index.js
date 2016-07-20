@@ -1,5 +1,9 @@
 var socket = io();
 
+var zeroDate = new Date(0, 0, 0, 0, 0, 0, 0);
+var redBg = 0;
+var color = "red";
+
 $(function() {
 	if (window.location.pathname == "/") {
 		socket.emit("join");
@@ -10,6 +14,9 @@ $(function() {
 	});
 	$("#reset").on("click", function() {
 		socket.emit("reset");
+		color = "red";
+		$(".top").css("background-color", color);
+		$(".buttons").css("background-color", color);
 	});
 	$("#settings").on("click", function() {
 		socket.emit("leave");
@@ -21,8 +28,22 @@ $(function() {
 	});
 
 	socket.on("tick", function(data) {
-		$(".top > .time").text(new Date(data.countdown).toLocaleTimeString());
-		$(".bottom > .time").text(new Date(data.time).toLocaleTimeString());
+		if (new Date(data.countdown) <= zeroDate) {
+			$(".top > .time").text('-' + new Date(2 * zeroDate.getTime() - new Date(data.countdown).getTime()).toLocaleTimeString('sk-SK', {hour12 : false}));			
+			if (data.running) {
+				if (redBg == 0) {
+					color = "red";
+				} else {
+					color = "#FF4000";
+				}
+				$(".top").css("background-color", color);
+				$(".buttons").css("background-color", color);
+				redBg ^= 1;
+			}
+		} else {
+			$(".top > .time").text(new Date(data.countdown).toLocaleTimeString('sk-SK', {hour12 : false}));
+		}
+		$(".bottom > .time").text(new Date(data.time).toLocaleTimeString('sk-SK', {hour12 : false}));
 	});
 
 	socket.on("titleChange", function(data) {

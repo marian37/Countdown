@@ -6,13 +6,14 @@ var running = false;
 function myTimer() {
 	exports.time = new Date();
 	if (running) {
-		if (countdown - 1000 >= zeroTime) {
+		//if (countdown - 1000 >= zeroTime) {
 			countdown -= 1000;
-		} else {
-			countdown = zeroTime;
-		}
+		//} else {
+		//	countdown = zeroTime;			
+		//}
 	}
 	exports.countdown = new Date(countdown);
+	exports.running = running;
 }
 
 exports.playPause = function() {	
